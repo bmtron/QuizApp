@@ -4,26 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="quiz.css" rel="stylesheet" type="text/css" />
+    
   </head>
   <body>
     <header>
       <h1>Monty Python's Flying Quiz</h1>
       <p class="score-count">Score: 0</p>
-      <p class="question-count">Question: 0/10</p>
+      <p class="question-count">Question: <span id="js-question-count">0/10</span></p>
     </header>
-   
-    <form class="question-box">
-      <fieldset for="questions">
-        <p class="question-content"></p>
-        <input type="radio" name="choice" id="questions"/><span></span><br>
-        <input type="radio" name="choice" id="questions" /><span></span><br>
-        <input type="radio" name="choice" id="questions" /><span></span><br>
-        <input type="radio" name="choice" id="questions" /><span></span><br>
-      </fieldset>
-      <button type="submit" class="submit-answer">Submit</button>
-    </form>
-    <script src="script.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <section class="question-container">
+        <section class="ready-start">
+            <p>Test your Python knowledge!</p>
+            <button class="start-quiz" type="submit">Ready?</button>
+        </section>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="quiz.js"></script>
   </body>
 </html>
