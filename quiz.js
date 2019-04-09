@@ -1,4 +1,4 @@
-const dataStore = [
+const dataStore = [ //collection of all the necessary data for the quiz, including questions, possible answers, and the correct answer
     {
       question: 'Finish this phrase: \'No one expects the ___!\'',
       choice1: 'FBI',
@@ -81,19 +81,20 @@ const dataStore = [
     }
   ];
 
-let questionN = 0;
-let userScore = 0;
+let questionN = 0;//the counter for the question number
+let userScore = 0;//the counter for the users correct responses
 
-  function handleStart() {
+  function handleStart() {//starts the quiz, updates the score to 0, starts the question counter, and renders the main questions to the page
     $('.question-container').on('click', '.start-quiz', event => {
       event.preventDefault();
       $('.ready-start').remove();
+      updateUserScore();
       renderQuestions(questionN);
       questionCount(questionN + 1);
     });
 }
 
-function renderQuestions(num) {
+function renderQuestions(num) {//renders the main screen that contains a question and a list of possible responses
   $('.question-container').append(`<form class="question-box">
       <fieldset for="questions">
         <p class="question-content">${dataStore[num].question}</p>
@@ -106,63 +107,101 @@ function renderQuestions(num) {
     </form>`);
 }
 
-function renderCorrectResults() {
-$('.question-container').append(`<section class="results-box"><p>Correct!</p>
-<p>Your current score is ${userScore}</p>
-<button type="submit" class="next-question">Next Question</button></section>`);
-$('.score-count').text(`Score: ${userScore}`);
+function renderCorrectResults() {//renders the results screen for when the user was correct
+
+if(questionN === 9) {
+renderFinish();
+}
+else {
+  $('.question-container').append(`<section class="results-box"><p>Correct!</p>
+  <p>Your current score is ${userScore}</p>
+  <button type="submit" class="next-question">Next Question</button></section>`);
+  updateUserScore();
+}
 }
 
-function renderWrongResults() {
+function renderWrongResults() {//renders the results screen for when the user was wrong
+  if (questionN === 9){
+    renderFinish();
+  }
+  else {
   $('.question-container').append(`<section class="results-box"><p>Wrong!</p>
   <p>Your score is ${userScore}</p>
   <button type="submit" class="next-question">Next Question</button></section>`);
+  }
 }
 
-function handleSubmitClick() {
+function handleSubmitClick() {//runs user selection to see if the correct answer was selected 
   $('.question-container').on('click', '.submit-answer', event =>{
     event.preventDefault();
-    
     userSelection(questionN);
   });
 }
 
-function handleNextClick() {
+function handleNextClick() {//updates the question count and rerenders the question when the next question button is clicked
   $('.question-container').on('click', '.next-question', event => {
     event.preventDefault();
     $('.results-box').remove();
+    if (questionN < 9){
     questionN++;
+    console.log(questionN);
     renderQuestions(questionN);
     questionCount(questionN + 1);
+    }
+    else if (questionN === 9){
+     renderRestart();
+    }
   });
 }
 
-function questionCount(num) {
+function questionCount(num) {//updates the question counter at the top of the page
  $('.question-count').text(`Question: ${num}/10`);
  
 }
 
-function userSelection(num) {
+function userSelection(num) {//checks to see if the users response matches the correct response, then renders the correct results page
   let correctAnswer = dataStore[num].correct;
   let userChoice = $('input:radio[name="choice"]:checked').val();
+
   if (userChoice){
-  if (userChoice === correctAnswer) {
-    console.log('correct');
-    userScore = userScore + 1;
-    $('.question-box').remove();
-    renderCorrectResults();
-  }
-  else {
+    if (userChoice === correctAnswer) {
+      userScore = userScore + 1;
+      console.log('correct');
+      $('.question-box').remove();
+      renderCorrectResults();
+      }
+    else {
     console.log('wrong');
     $('.question-box').remove();
     renderWrongResults();
+      }
+  }
+else if(!userChoice) {
+  alert('You must make a selection!');
   }
 }
-else if(!userChoice){
-  alert('You must make a selection!');
+
+function updateUserScore() {//updates the score at the top of the page
+  $('.score-count').text(`Score: ${userScore}`);
 }
+
+function renderRestart() {//renders screen asking user to restart 
+  $('.question-container').append('<section class="ready-start"><p>Start quiz over?</p><button class="start-quiz" type="submit">Start over</button></section>');
+  questionN = 0;
+  userScore = 0;
 }
+
+function renderFinish() {//changes the button text on the final question 
+  $('.question-container').append(`<section class="results-box"><p>Wrong!</p>
+  <p>Your score is ${userScore}</p>
+  <button type="submit" class="next-question">Finish Quiz</button></section>`);
+}
+
+function handleEverything() {//main callback containing all other relevant callbacks
 $(userSelection);
 $(handleSubmitClick);
 $(handleStart);
 $(handleNextClick);
+}
+
+$(handleEverything);//the callback that starts the quiz
