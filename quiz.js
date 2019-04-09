@@ -80,63 +80,50 @@ const dataStore = [
       correct: 'different'
     }
   ];
-  
-function handleStart() {
+  function handleStart() {
     $('.question-container').on('click', '.start-quiz', event => {
-      event.preventDefault();
       $('.ready-start').remove();
       renderQuestions();
     });
 }
 function renderQuestions() {
   $('.question-container').append(`<form class="question-box">
-  <fieldset for="questions">
-    <p class="question-content"></p>
-    <input type="radio" name="choice" id="questions"/><span id="js-choice-one"></span><br>
-    <input type="radio" name="choice" id="questions" /><span id="js-choice-two"></span><br>
-    <input type="radio" name="choice" id="questions" /><span id="js-choice-three"></span><br>
-    <input type="radio" name="choice" id="questions" /><span id="js-choice-four"></span><br>
-    <button type="submit" class="submit-answer">Submit</button>
-  </fieldset>
-</form>`)
-nextQuestion();
+      <fieldset for="questions">
+        <p class="question-content">${dataStore[0].question}</p>
+        <input type="radio" name="choice" id="questions"/><span id="js-choice-one">${dataStore[0].choice1}</span><br>
+        <input type="radio" name="choice" id="questions" /><span id="js-choice-two">${dataStore[0].choice2}</span><br>
+        <input type="radio" name="choice" id="questions" /><span id="js-choice-three">${dataStore[0].choice3}</span><br>
+        <input type="radio" name="choice" id="questions" /><span id="js-choice-four">${dataStore[0].choice4}</span><br>
+      </fieldset>
+      <button type="submit" class="submit-answer">Submit</button>
+    </form>`);
 }
-function isCorrect() {
-  //checks to see if the user answer is correct
-}
-function displayResult() {
-  //displays whether the user selected the correct response or not
-}
-function nextQuestion() {
-  $('.question-content').text(dataStore[questionCounter()].question);
+function renderResults() {
+
 }
 function handleNextClick() {
-  //handles the clicking of the next button when the user wants to move on to the next question
+  let questionN = 1;
   $('.question-container').on('click', '.submit-answer', event => {
     event.preventDefault();
-    $('.question-box').remove();
-    questionCounter();
-    console.log(questionCounter());
-    renderQuestions();
+    changeQuestion(questionN);
+    if (questionN < dataStore.length) {
+      questionN++;
+    }
+    else {
+      questionN = 0;
+    }
   });
 }
-function endResult() {
-  //displays final result to the user
+function changeQuestion(num) {
+  $('.question-content').text(dataStore[num].question);
+  $('#js-choice-one').text(dataStore[num].choice1);
+  $('#js-choice-two').text(dataStore[num].choice2);
+  $('#js-choice-three').text(dataStore[num].choice3);
+  $('#js-choice-four').text(dataStore[num].choice4);
 }
-function updateScore() {
-  //updates the users current score
+function questionCount(num) {
+ $('.question-count').text(`Question: ${num}/10`);
 }
-function updateQuestionNum() {
-  //updates the question number so the user knows what question they are on
-}
-function handleRestart() {
-  //sends the user to the start to take the quiz again
-}
-function questionCounter() {
-  //keeps track of what question the user is on
-  let questionNumber = 0;
-  questionNumber++;
-  return questionNumber;
-}
-$(handleNextClick);
 $(handleStart);
+$(questionCount);
+$(handleNextClick);
