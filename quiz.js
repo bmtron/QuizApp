@@ -58,10 +58,10 @@ const dataStore = [
     {
       question: 'In Monty Python and the Holy Grail, why did King Arthur decide not to go to Camelot?',
       choice1: 'It was rather dirty.',
-      choice2: '\'Tis a silly place',
+      choice2: 'Tis a silly place',
       choice3: 'It was too far away',
       choice4: 'It was too small',
-      correct: '\'Tis a silly place'
+      correct: 'Tis a silly place'
     },
     {
       question: 'Which two members of Monty Python starred in the Dead Parrot sketch?',
@@ -80,50 +80,89 @@ const dataStore = [
       correct: 'different'
     }
   ];
+
+let questionN = 0;
+let userScore = 0;
+
   function handleStart() {
     $('.question-container').on('click', '.start-quiz', event => {
+      event.preventDefault();
       $('.ready-start').remove();
-      renderQuestions();
+      renderQuestions(questionN);
+      questionCount(questionN + 1);
     });
 }
-function renderQuestions() {
+
+function renderQuestions(num) {
   $('.question-container').append(`<form class="question-box">
       <fieldset for="questions">
-        <p class="question-content">${dataStore[0].question}</p>
-        <input type="radio" name="choice" id="questions"/><span id="js-choice-one">${dataStore[0].choice1}</span><br>
-        <input type="radio" name="choice" id="questions" /><span id="js-choice-two">${dataStore[0].choice2}</span><br>
-        <input type="radio" name="choice" id="questions" /><span id="js-choice-three">${dataStore[0].choice3}</span><br>
-        <input type="radio" name="choice" id="questions" /><span id="js-choice-four">${dataStore[0].choice4}</span><br>
+        <p class="question-content">${dataStore[num].question}</p>
+        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice1}"/><span id="js-choice-one">${dataStore[num].choice1}</span><br>
+        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice2}"/><span id="js-choice-two">${dataStore[num].choice2}</span><br>
+        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice3}"/><span id="js-choice-three">${dataStore[num].choice3}</span><br>
+        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice4}"/><span id="js-choice-four">${dataStore[num].choice4}</span><br>
       </fieldset>
       <button type="submit" class="submit-answer">Submit</button>
     </form>`);
 }
-function renderResults() {
 
+function renderCorrectResults() {
+$('.question-container').append(`<section class="results-box"><p>Correct!</p>
+<p>Your current score is ${userScore}</p>
+<button type="submit" class="next-question">Next Question</button></section>`);
+$('.score-count').text(`Score: ${userScore}`);
 }
-function handleNextClick() {
-  let questionN = 1;
-  $('.question-container').on('click', '.submit-answer', event => {
+
+function renderWrongResults() {
+  $('.question-container').append(`<section class="results-box"><p>Wrong!</p>
+  <p>Your score is ${userScore}</p>
+  <button type="submit" class="next-question">Next Question</button></section>`);
+}
+
+function handleSubmitClick() {
+  $('.question-container').on('click', '.submit-answer', event =>{
     event.preventDefault();
-    changeQuestion(questionN);
-    if (questionN < dataStore.length) {
-      questionN++;
-    }
-    else {
-      questionN = 0;
-    }
+    
+    userSelection(questionN);
   });
 }
-function changeQuestion(num) {
-  $('.question-content').text(dataStore[num].question);
-  $('#js-choice-one').text(dataStore[num].choice1);
-  $('#js-choice-two').text(dataStore[num].choice2);
-  $('#js-choice-three').text(dataStore[num].choice3);
-  $('#js-choice-four').text(dataStore[num].choice4);
+
+function handleNextClick() {
+  $('.question-container').on('click', '.next-question', event => {
+    event.preventDefault();
+    $('.results-box').remove();
+    questionN++;
+    renderQuestions(questionN);
+    questionCount(questionN + 1);
+  });
 }
+
 function questionCount(num) {
  $('.question-count').text(`Question: ${num}/10`);
+ 
 }
+
+function userSelection(num) {
+  let correctAnswer = dataStore[num].correct;
+  let userChoice = $('input:radio[name="choice"]:checked').val();
+  if (userChoice){
+  if (userChoice === correctAnswer) {
+    console.log('correct');
+    userScore = userScore + 1;
+    $('.question-box').remove();
+    renderCorrectResults();
+  }
+  else {
+    console.log('wrong');
+    $('.question-box').remove();
+    renderWrongResults();
+  }
+}
+else if(!userChoice){
+  alert('You must make a selection!');
+}
+}
+$(userSelection);
+$(handleSubmitClick);
 $(handleStart);
-$(questionCount);
 $(handleNextClick);
