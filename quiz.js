@@ -110,7 +110,8 @@ function renderQuestions(num) {//renders the main screen that contains a questio
 function renderCorrectResults() {//renders the results screen for when the user was correct
 
 if(questionN === 9) {
-renderFinish();
+renderCorrectFinish();
+updateUserScore();
 }
 else {
   $('.question-container').append(`<section class="results-box"><p>Correct!</p>
@@ -122,10 +123,11 @@ else {
 
 function renderWrongResults() {//renders the results screen for when the user was wrong
   if (questionN === 9){
-    renderFinish();
+    renderWrongFinish();
   }
   else {
   $('.question-container').append(`<section class="results-box"><p>Wrong!</p>
+  <p>The correct answer is ${dataStore[questionN].correct}!</p>
   <p>Your score is ${userScore}</p>
   <button type="submit" class="next-question">Next Question</button></section>`);
   }
@@ -162,11 +164,11 @@ function questionCount(num) {//updates the question counter at the top of the pa
 function userSelection(num) {//checks to see if the users response matches the correct response, then renders the correct results page
   let correctAnswer = dataStore[num].correct;
   let userChoice = $('input:radio[name="choice"]:checked').val();
-
+  console.log(userChoice);
   if (userChoice){
     if (userChoice === correctAnswer) {
       userScore = userScore + 1;
-      console.log('correct');
+      
       $('.question-box').remove();
       renderCorrectResults();
       }
@@ -191,12 +193,17 @@ function renderRestart() {//renders screen asking user to restart
   userScore = 0;
 }
 
-function renderFinish() {//changes the button text on the final question 
+function renderWrongFinish() {//changes the button text on the final question 
   $('.question-container').append(`<section class="results-box"><p>Wrong!</p>
+  <p>Your score is ${userScore}</p>
+  <p>The correct answer was ${dataStore[questionN].correct}!</p>
+  <button type="submit" class="next-question">Finish Quiz</button></section>`);
+}
+function renderCorrectFinish() {
+  $('.question-container').append(`<section class="results-box"><p>Correct!</p>
   <p>Your score is ${userScore}</p>
   <button type="submit" class="next-question">Finish Quiz</button></section>`);
 }
-
 function handleEverything() {//main callback containing all other relevant callbacks
 $(userSelection);
 $(handleSubmitClick);
