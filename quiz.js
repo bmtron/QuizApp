@@ -108,17 +108,16 @@ function renderQuestions(num) {//renders the main screen that contains a questio
 }
 
 function renderCorrectResults() {//renders the results screen for when the user was correct
-
-if(questionN === 9) {
-renderCorrectFinish();
-updateUserScore();
-}
-else {
-  $('.question-container').append(`<section class="results-box"><p>Correct!</p>
-  <p>Your current score is ${userScore}</p>
-  <button type="submit" class="next-question">Next Question</button></section>`);
-  updateUserScore();
-}
+  if(questionN === 9) {
+    renderCorrectFinish();
+    updateUserScore();
+  }
+  else {
+    $('.question-container').append(`<section class="results-box"><p>Correct!</p>
+    <p>Your current score is ${userScore}</p>
+    <button type="submit" class="next-question">Next Question</button></section>`);
+    updateUserScore();
+  }
 }
 
 function renderWrongResults() {//renders the results screen for when the user was wrong
@@ -144,42 +143,23 @@ function handleNextClick() {//updates the question count and rerenders the quest
   $('.question-container').on('click', '.next-question', event => {
     event.preventDefault();
     $('.results-box').remove();
-    if (questionN < 9){
-    questionN++;
-    console.log(questionN);
-    renderQuestions(questionN);
-    questionCount(questionN + 1);
-    }
-    else if (questionN === 9){
-     renderRestart();
-    }
+    questionCheck();
   });
 }
 
 function questionCount(num) {//updates the question counter at the top of the page
  $('.question-count').text(`Question: ${num}/10`);
- 
 }
 
 function userSelection(num) {//checks to see if the users response matches the correct response, then renders the correct results page
   let correctAnswer = dataStore[num].correct;
   let userChoice = $('input:radio[name="choice"]:checked').val();
-  console.log(userChoice);
+
   if (userChoice){
-    if (userChoice === correctAnswer) {
-      userScore = userScore + 1;
-      
-      $('.question-box').remove();
-      renderCorrectResults();
-      }
-    else {
-    console.log('wrong');
-    $('.question-box').remove();
-    renderWrongResults();
-      }
+    answerCheck(userChoice, correctAnswer);
   }
-else if(!userChoice) {
-  alert('You must make a selection!');
+  else if(!userChoice) {
+    alert('You must make a selection!');
   }
 }
 
@@ -187,8 +167,33 @@ function updateUserScore() {//updates the score at the top of the page
   $('.score-count').text(`Score: ${userScore}`);
 }
 
+function answerCheck(inputVal, correctVal) {
+  if (inputVal === correctVal) {
+    userScore = userScore + 1;
+    $('.question-box').remove();
+    renderCorrectResults();
+    }
+  else {
+  console.log('wrong');
+  $('.question-box').remove();
+  renderWrongResults();
+    }
+}
+
+function questionCheck() {//checks to see if the user is on the last question. if they are, once they answer the question, they are prompted to restart the quiz
+  if (questionN < 9){
+    questionN++;
+    console.log(questionN);
+    renderQuestions(questionN);
+    questionCount(questionN + 1);
+  }
+  else if (questionN === 9){
+    renderRestart();
+  }
+}
+
 function renderRestart() {//renders screen asking user to restart 
-  $('.question-container').append('<section class="ready-start"><p>Start quiz over?</p><button class="start-quiz" type="submit">Start over</button></section>');
+  $('.question-container').append(`<section class="ready-start"><p>You finished the quiz! Your final score is ${userScore}</p><p>Start quiz over?</p><button class="start-quiz" type="submit">Start over</button></section>`);
   questionN = 0;
   userScore = 0;
 }
@@ -199,11 +204,13 @@ function renderWrongFinish() {//changes the button text on the final question
   <p>The correct answer was ${dataStore[questionN].correct}!</p>
   <button type="submit" class="next-question">Finish Quiz</button></section>`);
 }
+
 function renderCorrectFinish() {
   $('.question-container').append(`<section class="results-box"><p>Correct!</p>
   <p>Your score is ${userScore}</p>
   <button type="submit" class="next-question">Finish Quiz</button></section>`);
 }
+
 function handleEverything() {//main callback containing all other relevant callbacks
 $(userSelection);
 $(handleSubmitClick);
