@@ -96,7 +96,7 @@ let userScore = 0;//the counter for the users correct responses
 
 function renderQuestions(num) {//renders the main screen that contains a question and a list of possible responses
   $('.question-container').append(`<form class="question-box">
-      <fieldset for="questions">
+    <fieldset class="main-field" for="questions">
         <p class="question-content">${dataStore[num].question}</p>
         <input type="radio" name="choice" id="questions" value="${dataStore[num].choice1}"/><span id="js-choice-one">${dataStore[num].choice1}</span><br>
         <input type="radio" name="choice" id="questions" value="${dataStore[num].choice2}"/><span id="js-choice-two">${dataStore[num].choice2}</span><br>
@@ -193,7 +193,7 @@ function questionCheck() {//checks to see if the user is on the last question. i
 }
 
 function renderRestart() {//renders screen asking user to restart 
-  $('.question-container').append(`<section class="ready-start"><p>You finished the quiz! Your final score is ${userScore}</p><p>Start quiz over?</p><button class="start-quiz" type="submit">Start over</button></section>`);
+  $('.question-container').append(`<section class="ready-start"><p>You finished the quiz! Your final score is ${userScore}/10.</p><p>Start quiz over?</p><button class="start-quiz" type="submit">Start over</button></section>`);
   questionN = 0;
   userScore = 0;
 }
