@@ -6,13 +6,24 @@
     background-image: url("https://images7.alphacoders.com/807/thumb-1920-807907.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
   }
   button {
     font-family: inherit;
     font-size: 100%;
+    border: none;
+    background-color: rgb(53, 99, 228);
+    color: #FEFEFE;
+    margin-bottom: 15px;
   }
+  button:hover {
+    background-color: rgb(65, 123, 177);
+    box-shadow: 4px 4px #a7a6a6;
+  }
+ 
   header {
     border: 1px solid black;
+    height: 110px;
     background-color: rgba(236, 236, 236, 0.425);
     color: #FEFEFE;
     display: flex;
@@ -21,8 +32,10 @@
     margin-bottom: 175px;
   }
   #mp-logo {
-    width: 120px;
-    height: 145px;
+    width: 82px;
+    height: 100px;
+    position: absolute;
+    left: 50px;
   }
   .score-count {
     font-size: 170%;
@@ -36,12 +49,14 @@
   header p {
     font-size: 120%;
   }
+  .ready-start {
+    font-size: 135%;
+  }
   .question-container {
     width: 50%;
     margin-right: auto;
     margin-left: auto;
-    font-size: 140%;
-    background-color: rgba(236, 236, 236, 0.75);
+    background-color: rgba(236, 236, 236, 0.9);
     text-align: center;
     color: #000000;
     border-radius: 4px;
@@ -50,7 +65,7 @@
     width: 75%;
     background: none;
     color: #000000;
-    font-size: 140%;
+    font-size: 135%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -63,4 +78,28 @@
   }
   .question-box {
     background: none;
+    font-size: 135%;
+  }
+  .question-content {
+    margin-top: 5px;
+  }
+  .question-display-number {
+    margin-bottom: 5px;
+  }
+  @media screen and (max-width: 600px) {
+    header {
+      flex-direction: column;
+    }
+    h1 {
+      font-size: 75%;
+    }
+    .score-count {
+      margin: 0px;
+    }
+    .question-count {
+      margin: 0px;
+    }
+    #mp-logo {
+      display: none;
+    }
   }

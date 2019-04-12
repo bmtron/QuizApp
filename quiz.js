@@ -16,7 +16,7 @@ const dataStore = [ //collection of all the necessary data for the quiz, includi
       correct: 'Terry Gilliam'
     },
     {
-      question: 'Which phrase from ‘The Life of Brian’ has often been attributed the title of “the funniest line in movies”?',
+      question: 'Which phrase from ‘The Life of Brian’ has often been considered the one of the funniest movie quotes of all time?',
       choice1: '“Always look on the bright side of life.”',
       choice2: '“He’s not the messiah! He’s a very naughty boy! Now go away!”',
       choice3: '“I’m not the messiah!”',
@@ -97,7 +97,7 @@ let userScore = 0;//the counter for the users correct responses
 function renderQuestions(num) {//renders the main screen that contains a question and a list of possible responses
   $('.question-container').append(`<form class="question-box">
     <fieldset class="main-field" for="questions">
-        <p class="question-content">${dataStore[num].question}</p>
+        <p class="question-display-number">Question ${num + 1}.</p> <p class="question-content">${dataStore[num].question}</p>
         <input type="radio" name="choice" id="questions" value="${dataStore[num].choice1}"/><span id="js-choice-one">${dataStore[num].choice1}</span><br>
         <input type="radio" name="choice" id="questions" value="${dataStore[num].choice2}"/><span id="js-choice-two">${dataStore[num].choice2}</span><br>
         <input type="radio" name="choice" id="questions" value="${dataStore[num].choice3}"/><span id="js-choice-three">${dataStore[num].choice3}</span><br>
