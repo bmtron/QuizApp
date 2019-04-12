@@ -87,21 +87,33 @@ let userScore = 0;//the counter for the users correct responses
   function handleStart() {//starts the quiz, updates the score to 0, starts the question counter, and renders the main questions to the page
     $('.question-container').on('click', '.start-quiz', event => {
       event.preventDefault();
+      
       $('.ready-start').remove();
       updateUserScore();
       renderQuestions(questionN);
+      $('.selection').addClass('not-selected');
       questionCount(questionN + 1);
     });
 }
-
+function changeSelectionColor() {
+  $('.question-container').on('click', '.selection', event => {
+    $('.selection').removeClass('not-selected');
+    let currentSelection = $(event.currentTarget);
+    let notSelected = $('.selection').not(currentSelection);
+    notSelected.removeClass('user-selection-color');
+    notSelected.addClass('not-selected');
+    currentSelection.addClass('user-selection-color');
+    console.log('this clicked');
+  });
+}
 function renderQuestions(num) {//renders the main screen that contains a question and a list of possible responses
   $('.question-container').append(`<form class="question-box">
     <fieldset class="main-field" for="questions">
-        <p class="question-display-number">Question ${num + 1}.</p> <p class="question-content">${dataStore[num].question}</p>
-        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice1}"/><span id="js-choice-one">${dataStore[num].choice1}</span><br>
-        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice2}"/><span id="js-choice-two">${dataStore[num].choice2}</span><br>
-        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice3}"/><span id="js-choice-three">${dataStore[num].choice3}</span><br>
-        <input type="radio" name="choice" id="questions" value="${dataStore[num].choice4}"/><span id="js-choice-four">${dataStore[num].choice4}</span><br>
+        <div class="question-header"><p class="question-display-number">Question ${num + 1}.</p> <p class="question-content">${dataStore[num].question}</p></div>
+        <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice1}"/><p id="js-choice-one">${dataStore[num].choice1}</p></label><br>
+        <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice2}"/><p id="js-choice-two">${dataStore[num].choice2}</p></label><br>
+        <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice3}"/><p id="js-choice-three">${dataStore[num].choice3}</p></label><br>
+        <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice4}"/><p id="js-choice-four">${dataStore[num].choice4}</p></label><br>
       </fieldset>
       <button type="submit" class="submit-answer">Submit</button>
     </form>`);
@@ -185,6 +197,7 @@ function questionCheck() {//checks to see if the user is on the last question. i
     questionN++;
     console.log(questionN);
     renderQuestions(questionN);
+    $('.selection').addClass('not-selected');
     questionCount(questionN + 1);
   }
   else if (questionN === 9){
@@ -216,6 +229,7 @@ $(userSelection);
 $(handleSubmitClick);
 $(handleStart);
 $(handleNextClick);
+$(changeSelectionColor);
 }
 
 $(handleEverything);//the callback that starts the quiz

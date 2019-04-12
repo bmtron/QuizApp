@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
   }
   body {
     background-image: url("https://images7.alphacoders.com/807/thumb-1920-807907.jpg");
@@ -20,7 +21,6 @@
     background-color: rgb(65, 123, 177);
     box-shadow: 4px 4px #a7a6a6;
   }
- 
   header {
     border: 1px solid black;
     height: 110px;
@@ -37,6 +37,15 @@
     position: absolute;
     left: 50px;
   }
+  input[type="radio"] {
+    border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-appearance: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
   .score-count {
     font-size: 170%;
   }
@@ -51,19 +60,19 @@
   }
   .ready-start {
     font-size: 135%;
+    background-color: rgba(236, 236, 236, 0.85);
+    text-align: center;
   }
   .question-container {
     width: 50%;
     margin-right: auto;
     margin-left: auto;
-    background-color: rgba(236, 236, 236, 0.9);
-    text-align: center;
-    color: #000000;
+    background: none;
     border-radius: 4px;
   }
   .results-box {
     width: 75%;
-    background: none;
+    background-color: rgba(236, 236, 236, 0.85);
     color: #000000;
     font-size: 135%;
     margin-left: auto;
@@ -76,16 +85,60 @@
   .main-field {
     background: none;
   }
+  .question-header {
+    background-color: rgba(236, 236, 236, 0.85);
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 5px;
+  }
+  .question-box label {
+    width: 100%;
+    float: left;
+    clear: none;
+    height: 60px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+  }
+  .question-box label:focus {
+    background-color: rgb(248, 247, 247);
+  }
+  .submit-answer {
+    width: 85%;
+    position: relative;
+    left: 77px;
+    top: 10px;
+    border: 1px solid white; 
+  }
+  .not-selected {
+    background-color: rgba(236, 236, 236, 0.75);
+  }
+  .user-selection-color {
+    background-color: rgb(248, 247, 247);
+  }
+  .question-box #js-choice-one, #js-choice-two, #js-choice-three, #js-choice-four {
+    margin: 0;
+    padding-left: 25px;
+  }
+ 
   .question-box {
     background: none;
     font-size: 135%;
   }
   .question-content {
     margin-top: 5px;
+    margin-bottom: 0;
   }
   .question-display-number {
-    margin-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
   }
+  .selection:hover {
+    background-color: rgb(248, 247, 247);
+  }
+  
   @media screen and (max-width: 600px) {
     header {
       flex-direction: column;
