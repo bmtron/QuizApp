@@ -125,9 +125,11 @@ function renderCorrectResults() {//renders the results screen for when the user 
     updateUserScore();
   }
   else {
-    $('.question-container').append(`<section class="results-box"><p>Correct!</p>
+    $('.question-container').append(`<section class="results-box correct">
+    <p>Correct!</p>
     <p>Your current score is ${userScore}</p>
-    <button type="submit" class="next-question">Next Question</button></section>`);
+    </section>
+    <section class="submit-buttons"><button type="submit" class="next-question">Next Question</button></section>`);
     updateUserScore();
   }
 }
@@ -137,10 +139,12 @@ function renderWrongResults() {//renders the results screen for when the user wa
     renderWrongFinish();
   }
   else {
-  $('.question-container').append(`<section class="results-box"><p>Wrong!</p>
+  $('.question-container').append(`<section class="results-box wrong">
+  <p>Wrong!</p>
   <p>The correct answer is ${dataStore[questionN].correct}!</p>
   <p>Your score is ${userScore}</p>
-  <button type="submit" class="next-question">Next Question</button></section>`);
+  </section>
+  <section class="submit-buttons"><button type="submit" class="next-question">Next Question</button></section>`);
   }
 }
 
@@ -155,6 +159,7 @@ function handleNextClick() {//updates the question count and rerenders the quest
   $('.question-container').on('click', '.next-question', event => {
     event.preventDefault();
     $('.results-box').remove();
+    $('.submit-buttons').remove();
     questionCheck();
   });
 }
@@ -164,11 +169,11 @@ function questionCount(num) {//updates the question counter at the top of the pa
 }
 
 function userSelection(num) {//checks to see if the users response matches the correct response, then renders the correct results page
-  let correctAnswer = dataStore[num].correct;
+ 
   let userChoice = $('input:radio[name="choice"]:checked').val();
 
   if (userChoice){
-    answerCheck(userChoice, correctAnswer);
+    answerCheck(userChoice, dataStore[num].correct);
   }
   else if(!userChoice) {
     alert('You must make a selection!');
@@ -212,9 +217,10 @@ function renderRestart() {//renders screen asking user to restart
 }
 
 function renderWrongFinish() {//changes the button text on the final question 
-  $('.question-container').append(`<section class="results-box"><p>Wrong!</p>
-  <p>Your score is ${userScore}</p>
+  $('.question-container').append(`<section class="results-box">
+  <p>Wrong!</p>
   <p>The correct answer was ${dataStore[questionN].correct}!</p>
+  <p>Your score is ${userScore}</p>
   <button type="submit" class="next-question">Finish Quiz</button></section>`);
 }
 
@@ -225,7 +231,7 @@ function renderCorrectFinish() {
 }
 
 function handleEverything() {//main callback containing all other relevant callbacks
-$(userSelection);
+
 $(handleSubmitClick);
 $(handleStart);
 $(handleNextClick);
