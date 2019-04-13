@@ -109,7 +109,7 @@ function changeSelectionColor() {
 function renderQuestions(num) {//renders the main screen that contains a question and a list of possible responses
   $('.question-container').append(`<form class="question-box">
     <fieldset class="main-field" for="questions">
-        <div class="question-header"><p class="question-display-number">Question ${num + 1}.</p> <p class="question-content">${dataStore[num].question}</p></div>
+        <legend class="question-header"><p class="question-display-number">Question ${num + 1}.</p> <p class="question-content">${dataStore[num].question}</p></legend>
         <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice1}"/><p id="js-choice-one">${dataStore[num].choice1}</p></label><br>
         <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice2}"/><p id="js-choice-two">${dataStore[num].choice2}</p></label><br>
         <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice3}"/><p id="js-choice-three">${dataStore[num].choice3}</p></label><br>
@@ -206,6 +206,7 @@ function questionCheck() {//checks to see if the user is on the last question. i
     questionCount(questionN + 1);
   }
   else if (questionN === 9){
+    $('.final-button').remove();
     renderRestart();
   }
 }
@@ -217,17 +218,19 @@ function renderRestart() {//renders screen asking user to restart
 }
 
 function renderWrongFinish() {//changes the button text on the final question 
-  $('.question-container').append(`<section class="results-box">
+  $('.question-container').append(`<section class="results-box wrongf">
   <p>Wrong!</p>
   <p>The correct answer was ${dataStore[questionN].correct}!</p>
   <p>Your score is ${userScore}/${questionN + 1}.</p>
-  <button type="submit" class="next-question">Finish Quiz</button></section>`);
+  </section>
+  <button type="submit" class="next-question final-button">Finish Quiz</button>`);
 }
 
 function renderCorrectFinish() {
-  $('.question-container').append(`<section class="results-box"><p>Correct!</p>
+  $('.question-container').append(`<section class="results-box correct"><p>Correct!</p>
   <p>Your score is ${userScore}/${questionN + 1}</p>
-  <button type="submit" class="next-question">Finish Quiz</button></section>`);
+  </section>
+  <button type="submit" class="next-question final-button">Finish Quiz</button>`);
 }
 
 function handleEverything() {//main callback containing all other relevant callbacks
