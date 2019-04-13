@@ -127,7 +127,7 @@ function renderCorrectResults() {//renders the results screen for when the user 
   else {
     $('.question-container').append(`<section class="results-box correct">
     <p>Correct!</p>
-    <p>Your current score is ${userScore}</p>
+    <p>Your current score: ${userScore}/10</p>
     </section>
     <section class="submit-buttons"><button type="submit" class="next-question">Next Question</button></section>`);
     updateUserScore();
@@ -142,7 +142,7 @@ function renderWrongResults() {//renders the results screen for when the user wa
   $('.question-container').append(`<section class="results-box wrong">
   <p>Wrong!</p>
   <p>The correct answer is ${dataStore[questionN].correct}!</p>
-  <p>Your score is ${userScore}</p>
+  <p>Your score: ${userScore}/10</p>
   </section>
   <section class="submit-buttons"><button type="submit" class="next-question">Next Question</button></section>`);
   }
@@ -181,7 +181,7 @@ function userSelection(num) {//checks to see if the users response matches the c
 }
 
 function updateUserScore() {//updates the score at the top of the page
-  $('.score-count').text(`Score: ${userScore}`);
+  $('.score-count').text(`Score: ${userScore}/10`);
 }
 
 function answerCheck(inputVal, correctVal) {
@@ -220,18 +220,17 @@ function renderWrongFinish() {//changes the button text on the final question
   $('.question-container').append(`<section class="results-box">
   <p>Wrong!</p>
   <p>The correct answer was ${dataStore[questionN].correct}!</p>
-  <p>Your score is ${userScore}</p>
+  <p>Your score is ${userScore}/${questionN + 1}.</p>
   <button type="submit" class="next-question">Finish Quiz</button></section>`);
 }
 
 function renderCorrectFinish() {
   $('.question-container').append(`<section class="results-box"><p>Correct!</p>
-  <p>Your score is ${userScore}</p>
+  <p>Your score is ${userScore}/${questionN + 1}</p>
   <button type="submit" class="next-question">Finish Quiz</button></section>`);
 }
 
 function handleEverything() {//main callback containing all other relevant callbacks
-
 $(handleSubmitClick);
 $(handleStart);
 $(handleNextClick);

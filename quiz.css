@@ -8,13 +8,14 @@
     z-index: -1;
     height: 100%;
     width: 100%;
-  }
-  body {
     background-image: url("https://images7.alphacoders.com/807/thumb-1920-807907.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
+  }
+  body {
     height: 100%;
+    width: 100%;
   }
   button {
     font-family: inherit;
@@ -36,7 +37,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 175px;
+    margin-bottom: 115px;
     text-shadow:
 		-1px -1px 0 #000,
 		1px -1px 0 #000,
@@ -217,20 +218,34 @@
     text-shadow: none;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 650px) {
+
+    .question-container {
+      position: static;
+      width: 100%;
+    }
+    .question-box {
+      font-size: 100%;
+    }
+    .question-box label {
+      height: 40px;
+    }
     header {
-      flex-direction: column;
+      margin-bottom: 25px;
+      font-size: 100%;
     }
     h1 {
-      font-size: 75%;
-    }
-    .score-count {
-      margin: 0px;
-    }
-    .question-count {
-      margin: 0px;
+      display: none;
     }
     #mp-logo {
-      display: none;
+      position: relative;
+      top: 0px;
+      left: 0;
+    }
+    .score-count {
+      font-size: 125%;
+    }
+    .question-count {
+      font-size: 125%;
     }
   }
