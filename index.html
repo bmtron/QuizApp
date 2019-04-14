@@ -9,17 +9,17 @@
     <link href="https://fonts.googleapis.com/css?family=Pattaya" rel="stylesheet">
   </head>
   <body>
-    <header role="heading">
-        <img src="https://i.pinimg.com/564x/5b/68/a8/5b68a87d5b46c6724f4e254465c9a0cb.jpg" alt="Monty python logo being crushed
-        beneath a mighty foot" id="mp-logo">
+    <header role="banner">
+      <img src="https://i.pinimg.com/564x/5b/68/a8/5b68a87d5b46c6724f4e254465c9a0cb.jpg" alt="Monty python logo being crushed
+      beneath a mighty foot" id="mp-logo">
       <h1>Monty Python's Flying Quiz</h1>
       <p class="score-count">Score: 0/10</p>
       <p class="question-count">Question: <span id="js-question-count">0/10</span></p>
     </header>
-    <section class="question-container">
-        <section class="ready-start">
+    <section class="question-container" role="main">
+        <section class="ready-start" role="article">
             <p>Test your Python knowledge!</p>
-            <button class="start-quiz" type="submit">Ready?</button>
+            <button class="start-quiz" type="submit" role="button">Ready?</button>
         </section>
     </section>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

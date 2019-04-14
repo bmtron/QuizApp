@@ -211,8 +211,11 @@
     color: black;
     text-shadow: none;
   }
+  .final-button {
+    margin-top: 25px;
+  }
 
-  @media screen and (max-width: 1250px) {
+  @media screen and (max-width: 1400px) {
     
     .question-container {
       position: static;
@@ -235,7 +238,7 @@
       font-size: 100%;
     }
     header h1 {
-      font-size: 35px;
+      font-size: 40px;
       margin-bottom: 5px;
       margin-top: 5px;
     }
@@ -243,11 +246,11 @@
       display: none;
     }
     .score-count {
-      font-size: 125%;
+      font-size: 160%;
       margin: 0;
     }
     .question-count {
-      font-size: 125%;
+      font-size: 160%;
       margin: 0;
     }
    
@@ -272,9 +275,9 @@
       margin-bottom: 20px;
     }
     .score-count {
-      font-size: 140%;
+      font-size: 160%;
     }
     .score-count {
-      font-size: 140%;
+      font-size: 160%;
     }
   }

@@ -87,7 +87,6 @@ let userScore = 0;//the counter for the users correct responses
   function handleStart() {//starts the quiz, updates the score to 0, starts the question counter, and renders the main questions to the page
     $('.question-container').on('click', '.start-quiz', event => {
       event.preventDefault();
-      
       $('.ready-start').remove();
       updateUserScore();
       renderQuestions(questionN);
@@ -107,7 +106,7 @@ function changeSelectionColor() {
   });
 }
 function renderQuestions(num) {//renders the main screen that contains a question and a list of possible responses
-  $('.question-container').append(`<form class="question-box">
+  $('.question-container').append(`<form class="question-box" role="form">
     <fieldset class="main-field" for="questions">
         <legend class="question-header"><p class="question-display-number">Question ${num + 1}.</p> <p class="question-content">${dataStore[num].question}</p></legend>
         <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice1}"/><p id="js-choice-one">${dataStore[num].choice1}</p></label><br>
@@ -115,7 +114,7 @@ function renderQuestions(num) {//renders the main screen that contains a questio
         <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice3}"/><p id="js-choice-three">${dataStore[num].choice3}</p></label><br>
         <label class="selection"><input type="radio" name="choice" id="questions" tabindex="0" value="${dataStore[num].choice4}"/><p id="js-choice-four">${dataStore[num].choice4}</p></label><br>
       </fieldset>
-      <button type="submit" class="submit-answer">Submit</button>
+      <button type="submit" class="submit-answer" role="button">Submit</button>
     </form>`);
 }
 
@@ -125,11 +124,11 @@ function renderCorrectResults() {//renders the results screen for when the user 
     updateUserScore();
   }
   else {
-    $('.question-container').append(`<section class="results-box correct">
+    $('.question-container').append(`<section class="results-box correct" role="article">
     <p>Correct!</p>
     <p>Your current score: ${userScore}/10</p>
     </section>
-    <section class="submit-buttons"><button type="submit" class="next-question">Next Question</button></section>`);
+    <section class="submit-buttons"><button type="submit" class="next-question" role="button">Next Question</button></section>`);
     updateUserScore();
   }
 }
@@ -139,12 +138,12 @@ function renderWrongResults() {//renders the results screen for when the user wa
     renderWrongFinish();
   }
   else {
-  $('.question-container').append(`<section class="results-box wrong">
+  $('.question-container').append(`<section class="results-box wrong" role="article">
   <p>Wrong!</p>
   <p>The correct answer is ${dataStore[questionN].correct}!</p>
   <p>Your score: ${userScore}/10</p>
   </section>
-  <section class="submit-buttons"><button type="submit" class="next-question">Next Question</button></section>`);
+  <section class="submit-buttons"><button type="submit" class="next-question" role="button">Next Question</button></section>`);
   }
 }
 
@@ -191,7 +190,6 @@ function answerCheck(inputVal, correctVal) {
     renderCorrectResults();
     }
   else {
-  console.log('wrong');
   $('.question-box').remove();
   renderWrongResults();
     }
@@ -200,7 +198,6 @@ function answerCheck(inputVal, correctVal) {
 function questionCheck() {//checks to see if the user is on the last question. if they are, once they answer the question, they are prompted to restart the quiz
   if (questionN < 9){
     questionN++;
-    console.log(questionN);
     renderQuestions(questionN);
     $('.selection').addClass('not-selected');
     questionCount(questionN + 1);
@@ -212,25 +209,25 @@ function questionCheck() {//checks to see if the user is on the last question. i
 }
 
 function renderRestart() {//renders screen asking user to restart 
-  $('.question-container').append(`<section class="ready-start"><p>You finished the quiz! Your final score is ${userScore}/10.</p><p>Start quiz over?</p><button class="start-quiz" type="submit">Start over</button></section>`);
+  $('.question-container').append(`<section class="ready-start" role="article"><p>You finished the quiz! Your final score is ${userScore}/10.</p><p>Start quiz over?</p><button class="start-quiz" type="submit" role="button">Start over</button></section>`);
   questionN = 0;
   userScore = 0;
 }
 
 function renderWrongFinish() {//changes the button text on the final question 
-  $('.question-container').append(`<section class="results-box wrongf">
+  $('.question-container').append(`<section class="results-box wrong" role="article">
   <p>Wrong!</p>
   <p>The correct answer was ${dataStore[questionN].correct}!</p>
   <p>Your score is ${userScore}/${questionN + 1}.</p>
   </section>
-  <button type="submit" class="next-question final-button">Finish Quiz</button>`);
+  <button type="submit" class="next-question final-button" role="button">Finish Quiz</button>`);
 }
 
 function renderCorrectFinish() {
-  $('.question-container').append(`<section class="results-box correct"><p>Correct!</p>
+  $('.question-container').append(`<section class="results-box correct" role="article"><p>Correct!</p>
   <p>Your score is ${userScore}/${questionN + 1}</p>
   </section>
-  <button type="submit" class="next-question final-button">Finish Quiz</button>`);
+  <button type="submit" class="next-question final-button" role="button">Finish Quiz</button>`);
 }
 
 function handleEverything() {//main callback containing all other relevant callbacks
