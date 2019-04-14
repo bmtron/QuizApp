@@ -217,7 +217,6 @@
     .question-container {
       position: static;
       width: 100%;
-      margin-top: 80px;
       margin-left: 5px;
       margin-right: 5px;
     }
@@ -232,7 +231,7 @@
     }
     header {
       flex-direction: column;
-      margin-bottom: 25px;
+      margin-bottom: 220px;
       font-size: 100%;
     }
     header h1 {
