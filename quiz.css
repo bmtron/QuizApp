@@ -220,8 +220,7 @@
     .question-container {
       position: static;
       width: 100%;
-      margin-left: 5px;
-      margin-right: 5px;
+      
     }
     .question-box label {
       height: 80px;
@@ -231,6 +230,7 @@
     }
     .question-header {
       margin-bottom: 20px;
+      text-align: center;
     }
     header {
       flex-direction: column;
@@ -241,6 +241,7 @@
       font-size: 40px;
       margin-bottom: 5px;
       margin-top: 5px;
+      text-align: center;
     }
     #mp-logo {
       display: none;
@@ -257,11 +258,15 @@
   }
 
   @media screen and (max-width: 600px) {
+    header h1 {
+      text-align: center;
+    }
     .question-container {
       height: 90%;
     }
     .question-header {
       margin-bottom: 40px;
+      text-align: center;
     }
     .question-box label {
       height: 100px;
