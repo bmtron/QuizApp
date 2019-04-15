@@ -286,6 +286,7 @@
       font-size: 160%;
     }
   }
+  
   @media screen and (max-width: 460px) {
     header {
       margin-bottom: 100px;
