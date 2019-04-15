@@ -8,7 +8,7 @@
     z-index: -1;
     height: 100%;
     width: 100%;
-    background-image: url("https://images7.alphacoders.com/807/thumb-1920-807907.jpg");
+    background: url("https://images7.alphacoders.com/807/thumb-1920-807907.jpg") fixed;
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
@@ -238,7 +238,7 @@
     }
     header {
       flex-direction: column;
-      margin-bottom: 220px;
+      margin-bottom: 20px;
       font-size: 100%;
     }
     header h1 {
@@ -264,6 +264,9 @@
   @media screen and (max-width: 600px) {
     header h1 {
       text-align: center;
+    }
+    header {
+      margin-bottom: 20px;
     }
     .question-container {
       height: 90%;
@@ -293,7 +296,7 @@
 
   @media screen and (max-width: 460px) {
     header {
-      margin-bottom: 100px;
+      margin-bottom: 20px;
     }
     .question-box label {
       font-size: 110%;
