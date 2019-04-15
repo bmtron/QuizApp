@@ -102,7 +102,6 @@ function changeSelectionColor() {
     notSelected.removeClass('user-selection-color');
     notSelected.addClass('not-selected');
     currentSelection.addClass('user-selection-color');
-    console.log('this clicked');
   });
 }
 function renderQuestions(num) {//renders the main screen that contains a question and a list of possible responses
