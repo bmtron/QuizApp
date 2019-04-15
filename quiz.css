@@ -211,6 +211,7 @@
   .question-content {
     margin-top: 5px;
     margin-bottom: 0;
+    text-align: center;
   }
   .question-display-number {
     margin-top: 0;
