@@ -222,9 +222,8 @@
     text-shadow: none;
   }
 
-  @media screen and (max-width: 1150px) {
-    
-    }
+  @media screen and (max-width: 100px) {
+
     .question-container {
       position: static;
       width: 100%;
